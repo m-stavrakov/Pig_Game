@@ -29,9 +29,10 @@ player_scores = [0 for _ in range(players)] # the _ is replacing the variable (i
 
 # Stopping the game when max_score is reached
 while max(player_scores) < max_score:
-    
+
     for player_inx in range(players):
-    
+        print("\nPlayer number", player_inx + 1, "Turn has just started!")
+        print("Your total score is:", player_scores[player_inx], "\n")
         current_score = 0
         
         while True:
@@ -43,6 +44,7 @@ while max(player_scores) < max_score:
             value = roll()
             if value == 1:
                 print("You rolled 1! Turn done!")
+                current_score = 0
                 break
             else:
                 current_score += value
@@ -50,4 +52,10 @@ while max(player_scores) < max_score:
                 
             print("Your score is: ", current_score)
     
-        player_scores[player_inx]
+        player_scores[player_inx] += current_score
+        print("Your total score is:", player_scores[player_inx])
+
+# Finding the winner
+max_score = max(player_scores)
+winning_inx = player_scores.index(max_score)
+print("Player number", winning_inx + 1, "is the winner with a score of:", max_score)
