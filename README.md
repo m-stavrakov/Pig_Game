@@ -1,0 +1,1 @@
+Multiplayer game where one player gets a turn. Once it is your turn you get to roll a dice, getting a number between 1 and 6. If you get anything other than 1, you add it to your score. You can decide how many times you want to roll the dice. However, if you get a 1 on your turn you lose your score and it becomes 0. The player that reaches 50 points wins the game.  
