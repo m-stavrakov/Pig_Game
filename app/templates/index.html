@@ -4,24 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Dice Game</title>
 </head>
 <body>
+    <script>
+        $(document).ready(function() {
+            $("#play-button").click(function() {
+                let players = Number(prompt("Enter the number of players (2-4): "));
+                if (players >= 2 && players <= 4){
+                    $.ajax({
+                    url: "/roll/" + players,
+                    success: function(data) {
+                        if (data['success']){
+                            if ('winner' in data) {
+                                alert('Player ' + data['winner'] + ' wins!');
+                            }else{
+                                alert("Game completed with no winner.")
+                            }
+                        }else {
+                            alert(data['error']);
+                        }   
+                    }
+                    });
+                }else {
+                    alert("Invalid number of players. Must be between 2 - 4.");
+                }
+            });
+        });
+    </script>
     <h1>Dice Game</h1>
 
-    <div id="game_container">
-        <p id="status">
-
-        </p>
-
-        <button onclick="startGame()">
-            Start Game
-        </button>
-
-        <button onclick="rollDice()">
-            Roll Dice
-        </button>
-    </div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <button id="play-button">Play Game</button>
+    <!-- <script src="{{ url_for('static', filename='script.js') }}"></script> -->
 </body>
 </html>
